@@ -13,6 +13,7 @@ export default function SmoothScroll() {
       wheelMultiplier: 0.85,
       touchMultiplier: 1.2,
       autoRaf: true,
+      respectReducedMotion: false, // vẫn cuộn mượt trên máy bật "giảm chuyển động"
       // Chỉ bỏ qua vùng có thanh cuộn dọc riêng (lightbox, popup). Dải ngang (.rail, chip lọc)
       // vẫn để Lenis xử lý cuộn dọc, nếu không con trỏ nằm trên đó sẽ làm trang giật.
       prevent: (node) => !!node.closest?.(".lb, .promo"),

@@ -10,7 +10,8 @@
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#121212; --bg-2:#1D1D1C; --ink:#F4F4F1; --ink-2:#C9C9C4; --ink-3:#8C8C87; --line:#2E2E2C; --card:#1A1A19; } }
 :root[data-theme="dark"]{ --bg:#121212; --bg-2:#1D1D1C; --ink:#F4F4F1; --ink-2:#C9C9C4; --ink-3:#8C8C87; --line:#2E2E2C; --card:#1A1A19; }
 html{scroll-padding-top:calc(90px + env(safe-area-inset-top,0px)); scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important} }
+/* Giảm chuyển động: chỉ tắt chuyển động lớn (chạy liên tục, parallax) — fade, hover, reveal nhẹ vẫn giữ */
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .ticker-track,.wall-row{animation-duration:80s!important} }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-weight:400;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
@@ -553,7 +554,7 @@ h2{line-height:1.1;padding-top:.06em}
 .lb-inner{animation:promo-pop .45s cubic-bezier(.2,.9,.3,1.15) both}
 
 @media (prefers-reduced-motion:reduce){
-  .hero h1 > span,.hero-sub,.hero-cta,.hero-cards,.nav-pill,.hc-card,.nations .season-big{animation:none!important}
+  .hc-card[data-d="0"],.nations .season-big{animation:none!important}
 }
 
 /* Lightbox mobile: một cột cuộn được — ảnh trên, thông tin dưới */
@@ -688,3 +689,7 @@ html.lenis,html.lenis body{height:auto;scroll-behavior:auto!important}
 /* Dải concept: vuốt ngang trên cảm ứng, không bắt cuộn dọc; ảnh tách lớp GPU cho cuộn nhẹ */
 .rail{touch-action:pan-x pan-y;overscroll-behavior-x:contain}
 .rail a,.rail img{backface-visibility:hidden;transform:translateZ(0)}
+
+/* Máy bật "giảm chuyển động": reveal chỉ fade + dịch rất nhẹ, không xoay */
+.fx-reduce .rv{transform:translateY(12px)!important;transition-duration:.6s}
+.fx-reduce .rv.in{transform:none!important}

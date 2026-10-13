@@ -109,7 +109,7 @@ function HeroCards({ onOpen }: { onOpen: (k: string) => void }) {
 
   // Tự lật chậm; dừng khi rê chuột (desktop), tôn trọng reduced-motion
   useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (paused) return;
     const id = window.setInterval(() => setTop((x) => (x + 1) % n), 4500);
     return () => window.clearInterval(id);
   }, [paused, n, top]);

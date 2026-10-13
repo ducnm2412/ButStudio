@@ -17,9 +17,10 @@ const GROUPS = [
 /** Hiệu ứng khi cuộn: reveal so le, thanh tiến độ, parallax ảnh hero. */
 export default function ScrollFx() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const root = document.documentElement;
     root.classList.add("fx");
+    if (reduce) root.classList.add("fx-reduce");
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -73,7 +74,7 @@ export default function ScrollFx() {
         const y = window.scrollY;
         const max = root.scrollHeight - window.innerHeight;
         bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-        if (heroBg && y < window.innerHeight * 1.2) {
+        if (!reduce && heroBg && y < window.innerHeight * 1.2) {
           heroBg.style.transform = `translate3d(0, ${y * 0.3}px, 0) scale(${1 + y * 0.0002})`;
           if (heroWrap) {
             heroWrap.style.transform = `translate3d(0, ${y * 0.15}px, 0)`;
@@ -91,7 +92,7 @@ export default function ScrollFx() {
       mo.disconnect();
       window.removeEventListener("scroll", onScroll);
       bar.remove();
-      root.classList.remove("fx");
+      root.classList.remove("fx", "fx-reduce");
     };
   }, []);
 
