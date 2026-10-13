@@ -13,8 +13,9 @@ export default function SmoothScroll() {
       wheelMultiplier: 0.85,
       touchMultiplier: 1.2,
       autoRaf: true,
-      // Không làm mượt bên trong popup/lightbox/dải ngang có thanh cuộn riêng
-      prevent: (node) => !!node.closest?.(".lb, .promo, .rail, .filter-group, .nav-links"),
+      // Chỉ bỏ qua vùng có thanh cuộn dọc riêng (lightbox, popup). Dải ngang (.rail, chip lọc)
+      // vẫn để Lenis xử lý cuộn dọc, nếu không con trỏ nằm trên đó sẽ làm trang giật.
+      prevent: (node) => !!node.closest?.(".lb, .promo"),
     });
 
     // Link neo (#book, /#services…) trên cùng trang: trượt chậm tới section, (Lenis tự tính scroll-padding-top của html để chừa chỗ navbar)

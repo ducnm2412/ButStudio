@@ -675,3 +675,16 @@ html.lenis,html.lenis body{height:auto;scroll-behavior:auto!important}
   .lb-hint{display:block;text-align:center;font-size:12px;font-weight:600;color:#8C8C87;margin-top:10px;animation:hint 2.4s ease-in-out 2}
   @keyframes hint{50%{translate:6px 0}}
 }
+
+/* Ghé studio: nút gọi một hàng, 4 kênh MXH chia đều một hàng — không còn nút lẻ rớt dòng */
+.contact-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:560px}
+.contact-actions .btn-lime{grid-column:1 / -1;justify-self:start;min-width:240px}
+.contact-actions .btn-ghost{padding:0 10px;font-size:14px;min-width:0}
+@media (max-width:520px){
+  .contact-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contact-actions .btn-lime{justify-self:stretch}
+}
+
+/* Dải concept: vuốt ngang trên cảm ứng, không bắt cuộn dọc; ảnh tách lớp GPU cho cuộn nhẹ */
+.rail{touch-action:pan-x pan-y;overscroll-behavior-x:contain}
+.rail a,.rail img{backface-visibility:hidden;transform:translateZ(0)}
